@@ -2,8 +2,15 @@
 
   class MembersController extends BaseController{
 
+    public static function members(){
+      View::make('members.html');
+    }
+
     public static function signup(){
-      // Testaa koodiasi täällä
       View::make('signup.html');
+    }
+
+    public static function login(){
+      View::make('login.html');
     }
   }
