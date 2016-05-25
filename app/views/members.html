@@ -2,6 +2,7 @@
 {% block content %}
 
 <h1>Members</h1>
+
 <table class="table">
     <thead>
         <tr>
@@ -11,11 +12,13 @@
         </tr>
     </thead>
     <tbody>
-    <tr>
-        <th>Juuso</th>
-        <th>3</th>
-        <th>19.05.2016</th>
-    </tr>
+      {% for member in members %}
+        <tr>
+            <td>{{member.username}}</td>
+            <td>3</td>
+            <td>{{member.member_from}}</td>
+        </tr>
+      {% endfor %}
     </tbody>
 </table>
 

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Topic</h1>
+<h1>Topic: {{topic.title}}</h1>
 <table class="table">
     <thead>
         <tr>
@@ -11,16 +11,13 @@
         </tr>
     </thead>
     <tbody>
-    <tr>
-        <th>eka viesti</th>
-        <th>Miten korkealle raketin ensimmäinen vaihe lentää</th>
-        <th>11.05.2016</th>
-    </tr>
-    <tr>
-        <th>toka viesti</th>
-        <th>Riippuu lähtökulmasta ja nopeudesta</th>
-        <th>11.05.2016</th>
-    </tr>
+      {% for msg in messages %}
+        <tr>
+            <th>{{msg.member_id}}</th>
+            <th>{{msg.msg}}</th>
+            <th>{{msg.published}}</th>
+        </tr>
+      {% endfor %}
     </tbody>
 </table>
 

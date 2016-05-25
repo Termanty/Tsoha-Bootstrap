@@ -11,11 +11,13 @@
         </tr>
     </thead>
     <tbody>
-    <tr>
-        <th>eka</th>
-        <th>Kuinka saada tää toimiin</th>
-        <th>11.05.2016</th>
-    </tr>
+      {% for topic in topics %} 
+        <tr>
+          <th>{{topic.username}}</th>
+          <th><a href="{{base_path}}/topics/{{topic.id}}">{{topic.title}}</th>
+          <th>{{topic.published}}</th>
+        </tr>
+      {% endfor %}
     </tbody>
 </table>
 

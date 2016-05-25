@@ -18,6 +18,7 @@ CREATE TABLE Topic(
 CREATE TABLE Message(
     id SERIAL PRIMARY KEY,
     topic_id INTEGER REFERENCES Topic(id),
+    member_id INTEGER REFERENCES Member(id),
     msg TEXT NOT NULL,
     published DATE
 );

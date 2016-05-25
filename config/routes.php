@@ -4,8 +4,8 @@
     TopicsController::index();
   });
 
-  $routes->get('/topics/1', function() {
-    TopicsController::topic();
+  $routes->get('/topics/:id', function($id) {
+    TopicsController::topic($id);
   });
 
   $routes->get('/signup', function() {

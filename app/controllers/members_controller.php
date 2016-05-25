@@ -1,9 +1,11 @@
 <?php
 
+  require 'app/models/member.php';
   class MembersController extends BaseController{
-
+    
     public static function members(){
-      View::make('members.html');
+      $members = Member::all();
+      View::make('members.html', array('members' => $members));
     }
 
     public static function signup(){
