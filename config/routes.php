@@ -20,7 +20,7 @@
     MembersController::members();
   });
 
-  $routes->get('/tags', function() {
-    TagsController::tags();
+  $routes->get('/categories', function() {
+    CategoriesController::categories();
   });
 

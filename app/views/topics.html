@@ -13,7 +13,7 @@
     <tbody>
       {% for topic in topics %} 
         <tr>
-          <th>{{topic.username}}</th>
+          <th><a href="{{base_path}}/members/{{topic.user_id}}">{{topic.username}}</th>
           <th><a href="{{base_path}}/topics/{{topic.id}}">{{topic.title}}</th>
           <th>{{topic.published}}</th>
         </tr>

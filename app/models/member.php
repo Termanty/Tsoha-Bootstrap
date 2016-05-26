@@ -2,7 +2,7 @@
 
   class Member extends BaseModel{
 
-    public $id, $username, $password, $member_from;
+    public $id, $username, $password, $joined;
 
     public function __construct($attributes){
       parent::__construct($attributes);
@@ -34,7 +34,7 @@
         'id' => $row['id'],
         'username' => $row['username'],
         'password' => $row['password'],
-        'member_from' => $row['member_from']
+        'joined' => $row['joined']
       ));
     }
   }

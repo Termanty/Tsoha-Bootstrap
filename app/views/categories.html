@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Tags </h1>
+<h1>Categories</h1>
 <table class="table">
     <thead>
         <tr>
@@ -11,11 +11,13 @@
         </tr>
     </thead>
     <tbody>
-    <tr>
-        <th>nasa</th>
-        <th>5</th>
-        <th>NASA related topics</th>
-    </tr>
+      {% for categ in categories %}
+        <tr>
+            <th>{{categ.name}}</th>
+          <th>5</th>
+          <th>{{categ.description}}</th>
+        </tr>
+      {% endfor %}
     </tbody>
 </table>
 

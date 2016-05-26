@@ -12,6 +12,7 @@
     public static function topic($id){
       $topic = Topic::find($id);
       $messages = Message::findMessagesForTopic($id);
+      Kint::dump($messages);
    	  View::make('topic.html', array('topic' => $topic, 'messages' => $messages));
     }
   }

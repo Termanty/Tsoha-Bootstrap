@@ -31,10 +31,10 @@
     }
 
     private static function getTopic($row){
-      $member = Member::find($row['member_id']);
+      $member = Member::find($row['user_id']);
       return new Topic(array(
         'id' => $row['id'],
-        'user_id' => $row['member_id'],
+        'user_id' => $row['user_id'],
         'username' => $member->username,   
         'title' => $row['title'],
         'published' => $row['published']

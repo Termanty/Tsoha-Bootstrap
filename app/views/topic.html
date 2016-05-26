@@ -13,8 +13,8 @@
     <tbody>
       {% for msg in messages %}
         <tr>
-            <th>{{msg.member_id}}</th>
-            <th>{{msg.msg}}</th>
+            <th><a href="{{base_path}}/members/{{msg.user_id}}">{{msg.username}}</th>
+            <th>{{msg.content}}</th>
             <th>{{msg.published}}</th>
         </tr>
       {% endfor %}
