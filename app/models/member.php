@@ -29,6 +29,18 @@
       return $members;
     }
 
+    public function save(){
+      $query = DB::connection()->prepare('INSERT INTO Member (username, password, joined)
+        VALUES (:username, :password, NOW()) RETURNING *');
+      $query->execute(array(
+        'username' => $this->username,
+        'password' => $this->password
+      ));
+      $row = $query->fetch();
+      $this->id = $row['id'];
+      $this->joined = $row['joined'];
+    }
+
     public static function getMember($row){
       return new Member(array( 
         'id' => $row['id'],

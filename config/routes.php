@@ -20,6 +20,14 @@
     MembersController::members();
   });
 
+  $routes->get('/members/:id', function($id) {
+    MembersController::member($id);
+  });
+
+  $routes->post('/members', function(){
+    MembersController::new_member();
+  });
+
   $routes->get('/categories', function() {
     CategoriesController::categories();
   });

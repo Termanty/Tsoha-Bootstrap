@@ -4,17 +4,17 @@
 
 <h1>Signup</h1>
 
-<form>
+<form method="post" action="{{base_path}}/members">
   <div class="row">
     <div class="form-group col-xs-5">
       <label>username</label>
-      <input type="text" class="form-control">
+      <input type="text" name="username" class="form-control">
     </div>
   </div>
   <div class="row">
     <div class="form-group col-xs-5">
       <label>password</label>
-      <input type="password" class="form-control">
+      <input type="password" name="password" class="form-control">
     </div>
   </div>
   <div class="row">
@@ -22,6 +22,9 @@
       <label>repeat password</label>
       <input type="text" class="form-control">
     </div>
+  </div>
+  <div class="row">
+    <button type="submit" class="btn btn-primary">Signup</button>
   </div>
 </form>
 
