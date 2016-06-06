@@ -5,16 +5,16 @@
     
     public static function members(){
       $members = Member::all();
-      View::make('members.html', array('members' => $members));
+      View::make('members/index.html', array('members' => $members));
     }
 
     public static function member($id){
       $member = Member::find($id);
-      View::make('member.html', array('member' => $member));
+      View::make('members/show.html', array('member' => $member));
     }
 
     public static function signup(){
-      View::make('signup.html');
+      View::make('members/signup.html');
     }
 
     public static function new_member(){
@@ -29,6 +29,6 @@
     }
 
     public static function login(){
-      View::make('login.html');
+      View::make('members/login.html');
     }
   }

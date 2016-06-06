@@ -8,6 +8,14 @@
     TopicsController::topic($id);
   });
 
+  $routes->post('/topics', function() {
+    TopicsController::new_topic();
+  });
+
+  $routes->post('/topics/:id', function($id) {
+    MessagesController::reply($id);
+  });
+
   $routes->get('/signup', function() {
     MembersController::signup();
   });

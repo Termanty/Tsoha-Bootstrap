@@ -2,6 +2,7 @@
 {% block content %}
 
 <h1>Topic: {{topic.title}}</h1>
+
 <table class="table">
     <thead>
         <tr>
@@ -20,6 +21,16 @@
       {% endfor %}
     </tbody>
 </table>
+
+<form method="post" action="{{base_path}}/topics/{{topic.id}}">
+  <input type="hidden" name="topic_id" value=topic_id>
+  <div class="form-group">
+    <textarea name="message" class="form-control col-sm-4" rows="5" placeholder="write your reply here"></textarea>
+  </div>
+  <div class="form-group">
+      <button type="submit" class="btn btn-primary">Reply</button>
+  </div>
+</form>
 
 
 {% endblock %}

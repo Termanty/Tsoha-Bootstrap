@@ -19,6 +19,21 @@
       return $messages;
     }
 
+    public function save(){
+      $query = DB::connection()->prepare('INSERT INTO 
+        Message (topic_id, user_id, content, published) 
+        VALUES (:topic_id, :user_id, :content, NOW()) 
+        returning *');
+      $query->execute(array(
+        'topic_id' => $this->topic_id,
+        'user_id' => $this->user_id,
+        'content' => $this->content,
+      ));
+      $row = $query->fetch();
+      $this->id = $row['id'];
+      $this->published = $row['published'];
+    }
+
     public static function getMessage($row){
       $member = Member::find($row['user_id']);
       return new Message(array(

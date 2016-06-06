@@ -6,6 +6,6 @@
     public static function categories(){
       $categories = Category::all();
       Kint::dump($categories);
-      View::make('categories.html', array('categories' => $categories));
+      View::make('categoriesi/index.html', array('categories' => $categories));
     }
   }

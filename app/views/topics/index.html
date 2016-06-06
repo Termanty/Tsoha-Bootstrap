@@ -2,6 +2,23 @@
 {% block content %}
 
 <h1> Topics </h1>
+
+<button type="button" class="btn btn-default">New Topic</button>
+
+<form method="post" action="{{base_path}}/topics">
+  <div class="form-group">
+    <label>Title</label>
+    <input type="text" name="title" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Message</label>
+    <textarea name="message" class="form-control col-sm-4" rows="5" placeholder="write here"></textarea>
+  </div>
+  <div class="form-group">
+      <button type="submit" class="btn btn-primary">Create new topic</button>
+  </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>

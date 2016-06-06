@@ -6,13 +6,13 @@
 
     public static function index(){
       $topics = Topic::all(); 
-   	  View::make('topics.html', array('topics' => $topics));
+   	  View::make('topics/index.html', array('topics' => $topics));
     }
 
     public static function topic($id){
       $topic = Topic::find($id);
       $messages = Message::findMessagesForTopic($id);
       Kint::dump($messages);
-   	  View::make('topic.html', array('topic' => $topic, 'messages' => $messages));
+   	  View::make('topics/show.html', array('topic' => $topic, 'messages' => $messages));
     }
   }
