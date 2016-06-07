@@ -11,7 +11,6 @@
         'user_id' => 5,
         'content' => $params['message'] 
       ));
-      Kint::dump($message);
       $message->save();
       Redirect::to('/topics/' . $id, array('alert_message' => 'new reply'));
     }

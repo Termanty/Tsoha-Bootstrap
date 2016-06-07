@@ -3,19 +3,20 @@
 
 <h1> Topics </h1>
 
-<button type="button" class="btn btn-default">New Topic</button>
+<button type="button" class="btn btn-primary" id="show_form">New Topic</button>
 
-<form method="post" action="{{base_path}}/topics">
+<form method="post" action="{{base_path}}/topics" id="new_topic_form" class="hidden">
   <div class="form-group">
     <label>Title</label>
-    <input type="text" name="title" class="form-control">
+    <input type="text" name="title" class="form-control" placeholder="Write the title of your topic here">
   </div>
   <div class="form-group">
     <label>Message</label>
-    <textarea name="message" class="form-control col-sm-4" rows="5" placeholder="write here"></textarea>
+    <textarea name="message" class="form-control col-sm-4" rows="5" placeholder="Write content of your message here"></textarea>
   </div>
   <div class="form-group">
       <button type="submit" class="btn btn-primary">Create new topic</button>
+      <button type="button" class="btn btn-warning hidden" id="hide_form">Hide form</button>
   </div>
 </form>
 
@@ -37,6 +38,5 @@
       {% endfor %}
     </tbody>
 </table>
-
 
 {% endblock %}

@@ -30,6 +30,20 @@
       return $topics;
     }
 
+    public function save(){
+      $query = DB::connection()->prepare('INSERT INTO 
+        Topic (user_id, title, published) 
+        VALUES (:user_id, :title, NOW()) 
+        returning *');
+      $query->execute(array(
+        'user_id' => $this->user_id,
+        'title' => $this->title,
+      ));
+      $row = $query->fetch();
+      $this->id = $row['id'];
+      $this->published = $row['published'];
+    }
+
     private static function getTopic($row){
       $member = Member::find($row['user_id']);
       return new Topic(array(
