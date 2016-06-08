@@ -17,14 +17,15 @@
 
     public static function new_topic(){
       $params = $_POST;
+      $user = self::fetch_current_user();
       $topic = new Topic(array(
-        'user_id' => 4,
+        'user_id' => $user->id,
         'title' => $params['title']
       ));
       $topic->save();
       $message = new Message(array(
         'topic_id' => $topic->id,
-        'user_id' => 4,
+        'user_id' => $user->id,
         'content' => $params['message'] 
       ));
       $message->save();

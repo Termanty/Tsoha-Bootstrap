@@ -22,12 +22,15 @@
     </tbody>
 </table>
 
-<form method="post" action="{{base_path}}/topics/{{topic.id}}">
-  <input type="hidden" name="topic_id" value=topic_id>
-  <div class="form-group">
-    <textarea name="message" class="form-control col-sm-4" rows="5" placeholder="write your reply here"></textarea>
-  </div>
-  <button type="submit" class="btn btn-primary">Reply</button>
-</form>
+{% if current_user %}
+  <form method="post" action="{{base_path}}/topics/{{topic.id}}">
+    <input type="hidden" name="topic_id" value=topic_id>
+    <div class="form-group">
+      <textarea name="message" class="form-control col-sm-4" rows="5" 
+        placeholder="write your reply here"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Reply</button>
+  </form>
+{% endif %}
 
 {% endblock %}

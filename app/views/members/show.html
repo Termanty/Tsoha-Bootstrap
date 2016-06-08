@@ -1,12 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% if alert_message %}
-  <div class="alert alert-success">
-    {{alert_message}}
-  </div>
-{% endif %}
-
 <h1>{{member.username}}</h1>
 
 <table class="table">

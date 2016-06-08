@@ -6,6 +6,7 @@
 
     public function __construct($attributes){
       parent::__construct($attributes);
+      $this->validators = array('validate_username', 'validate_password');
     }
     
     public static function find($id){
@@ -64,6 +65,28 @@
         'password' => $row['password'],
         'joined' => $row['joined']
       ));
+    }
+
+    public function validate_username(){
+      $errors = array();
+      if($this->username == '' || $this->username == null){
+        $errors[] = "Username can't be empty.";
+      }
+      if(strlen($this->username) < 3 || strlen($this->username) > 15){
+        $errors[] = "Username has to be between 3 and 15 characters long.";
+      }
+      return $errors;
+    }
+
+    public function validate_password(){
+      $errors = array();
+      if($this->password == '' || $this->password == null){
+        $errors[] = "Password can't be empty.";
+      }
+      if(strlen($this->username) < 8 || strlen($this->password) > 30){
+        $errors[] = "Password has to be between 8 and 30 characters long.";
+      }
+      return $errors;
     }
   }
 

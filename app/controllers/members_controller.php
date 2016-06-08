@@ -23,9 +23,15 @@
         'username' => $params['username'],
         'password' => $params['password']
       ));
-      $member->save();
-      Redirect::to('/members/' . $member->id, array(
-        'alert_message' => 'Well come to Juttupaikka'));
+      $errors = $member->errors();
+      if(count($errors) == 0){
+        $member->save();
+        Redirect::to('/members/' . $member->id, array(
+          'alert_message' => 'Well come to Juttupaikka'));
+      }else{
+        View::make('members/signup.html', array(
+          'errors' => $errors));
+      }
     }
 
     public static function login(){
@@ -37,7 +43,8 @@
       $member = Member::authenticate($params['username'], $params['password']);
 
       if(!$member){
-        View::make('members/login.html', array('error' => 'Wrong username or password'));
+        View::make('members/login.html', array(
+          'errors' => array('Wrong username or password')));
       }else{
         $_SESSION['user'] = $member->id;
         Redirect::to('/', array(

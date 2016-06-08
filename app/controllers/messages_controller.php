@@ -5,10 +5,11 @@
   class MessagesController extends BaseController{
 
     public static function reply($id){
+      $user = self::fetch_current_user();
       $params = $_POST;
       $message = new Message(array(
         'topic_id' => $id,
-        'user_id' => 5,
+        'user_id' => $user->id,
         'content' => $params['message'] 
       ));
       $message->save();

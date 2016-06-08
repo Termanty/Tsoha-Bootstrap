@@ -1,30 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% if alert_message %}
-  <div class="alert alert-success">
-    {{alert_message}}
-  </div>
-{% endif %}
-
 <h1> Topics </h1>
 
-<button type="button" class="btn btn-primary" id="show_form">New Topic</button>
+{% if current_user %}
+  <button type="button" class="btn btn-primary" id="show_form">New Topic</button>
 
-<form method="post" action="{{base_path}}/topics" id="new_topic_form" class="hidden">
-  <div class="form-group">
-    <label>Title</label>
-    <input type="text" name="title" class="form-control" placeholder="Write the title of your topic here">
-  </div>
-  <div class="form-group">
-    <label>Message</label>
-    <textarea name="message" class="form-control col-sm-4" rows="5" placeholder="Write content of your message here"></textarea>
-  </div>
-  <div class="form-group">
+  <form method="post" action="{{base_path}}/topics" id="new_topic_form" class="hidden">
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" name="title" class="form-control" 
+        placeholder="Write the title of your topic here">
+    </div>
+    <div class="form-group">
+      <label>Message</label>
+      <textarea name="message" class="form-control col-sm-4" rows="5" 
+        placeholder="Write content of your message here"></textarea>
+    </div>
+    <div class="form-group">
       <button type="submit" class="btn btn-primary">Create new topic</button>
       <button type="button" class="btn btn-warning hidden" id="hide_form">Hide form</button>
-  </div>
-</form>
+    </div>
+  </form>
+{% endif %}
 
 <table class="table">
     <thead>
