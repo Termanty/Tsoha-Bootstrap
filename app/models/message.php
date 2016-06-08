@@ -27,7 +27,7 @@
       $query->execute(array(
         'topic_id' => $this->topic_id,
         'user_id' => $this->user_id,
-        'content' => $this->content,
+        'content' => $this->content
       ));
       $row = $query->fetch();
       $this->id = $row['id'];

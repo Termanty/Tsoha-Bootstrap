@@ -44,11 +44,16 @@
             <li><a href="{{base_path}}/members">Members</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            {% if current_user %}
+              <li><a href={{base_path}}/members/{{current_user.id}}>
+                {{current_user.username}}</a></li>
+              <li><a href="{{base_path}}/logout">logout</a></li>
+            {% else %}
               <li><a href="{{base_path}}/login">login</a></li>
-            <li><a href="{{base_path}}/signup">signup</a></li>
+              <li><a href="{{base_path}}/signup">signup</a></li>
+            {% endif %}
           </ul>
         </div>
-
       </div>
     </nav>
 

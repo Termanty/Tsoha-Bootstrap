@@ -30,7 +30,8 @@
     }
 
     public function save(){
-      $query = DB::connection()->prepare('INSERT INTO Member (username, password, joined)
+      $query = DB::connection()->prepare('
+        INSERT INTO Member (username, password, joined)
         VALUES (:username, :password, NOW()) RETURNING *');
       $query->execute(array(
         'username' => $this->username,
@@ -39,6 +40,21 @@
       $row = $query->fetch();
       $this->id = $row['id'];
       $this->joined = $row['joined'];
+    }
+
+    public static function authenticate($username, $password) {
+      $query = DB::connection()->prepare('
+        SELECT * FROM Member 
+        WHERE username = :username AND password = :password LIMIT 1');
+      $query->execute(array(
+        'username' => $username,
+        'password' => $password
+      ));
+      $row = $query->fetch();
+      if($row) {
+        return Member::getMember($row);
+      }
+      return null;
     }
 
     public static function getMember($row){

@@ -2,22 +2,20 @@
 
 {% block content %}
 
-<h1>Login</h1>
-
-<form>
+<form method="post" action="{{base_path}}/login">
   <div class="row">
     <div class="form-group col-xs-5">
-      <label>username</label>
-      <input type="text" class="form-control">
+      <label for="un">username</label>
+      <input type="text" class="form-control" name="username" id="un">
     </div>
   </div>
   <div class="row">
     <div class="form-group col-xs-5">
-      <label>password</label>
-      <input type="password" class="form-control">
+      <label for="pwd">password</label>
+      <input type="password" class="form-control" name="password" id="pwd">
     </div>
   </div>
+  <button type="submit" class="btn btn-primary">Login</button>
 </form>
-
 
 {% endblock %}

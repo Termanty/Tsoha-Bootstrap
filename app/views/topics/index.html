@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 
+{% if alert_message %}
+  <div class="alert alert-success">
+    {{alert_message}}
+  </div>
+{% endif %}
+
 <h1> Topics </h1>
 
 <button type="button" class="btn btn-primary" id="show_form">New Topic</button>

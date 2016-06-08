@@ -2,8 +2,11 @@
 
   class BaseController{
 
-    public static function get_user_logged_in(){
-      // Toteuta kirjautuneen käyttäjän haku tähän
+    public static function fetch_current_user(){
+      if(isset($_SESSION['user'])){
+        $user = Member::find($_SESSION['user']);
+        return $user;
+      }
       return null;
     }
 

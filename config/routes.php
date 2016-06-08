@@ -24,6 +24,14 @@
     MembersController::login();
   });
 
+  $routes->post('/login', function() {
+    MembersController::handle_login();
+  });
+
+  $routes->get('/logout', function() {
+    MembersController::logout();
+  });
+
   $routes->get('/members', function() {
     MembersController::members();
   });

@@ -24,11 +24,34 @@
         'password' => $params['password']
       ));
       $member->save();
-      Redirect::to('/members/' . $member->id, 
-        array('alert_message' => 'Well come to Juttupaikka'));
+      Redirect::to('/members/' . $member->id, array(
+        'alert_message' => 'Well come to Juttupaikka'));
     }
 
     public static function login(){
       View::make('members/login.html');
+    }
+
+    public static function handle_login(){
+      $params = $_POST;
+      $member = Member::authenticate($params['username'], $params['password']);
+
+      if(!$member){
+        View::make('members/login.html', array('error' => 'Wrong username or password'));
+      }else{
+        $_SESSION['user'] = $member->id;
+        Redirect::to('/', array(
+          'alert_message' => 'Wellcome back ' . $member->username . '!'));
+      }
+    }
+
+    public static function logout(){
+      $user = self::fetch_current_user();
+      if($user){
+        unset($_SESSION['user']);
+        Redirect::to('/', array(
+          'alert_message' => 'Bye bye ' . $user->username . '!'));
+      }
+      View::make('/');
     }
   }
