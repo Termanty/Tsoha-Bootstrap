@@ -1,12 +1,12 @@
 <?php
 
-  require 'app/models/member.php';
   class Topic extends BaseModel{
 
-    public $id, $user_id, $username, $title, $published;
+    public $id, $user_id, $username, $title, $published, $tags;
 
     public function __construct($attributes){
       parent::__construct($attributes);
+      $this->validators = array('validate_title');
     }
 
     public static function find($id){
@@ -46,12 +46,25 @@
 
     private static function getTopic($row){
       $member = Member::find($row['user_id']);
+      $tags = Tag::fetchTags($row['id']);
       return new Topic(array(
         'id' => $row['id'],
         'user_id' => $row['user_id'],
         'username' => $member->username,   
         'title' => $row['title'],
-        'published' => $row['published']
+        'published' => $row['published'],
+        'tags' => $tags
       ));
+    }
+
+    public function validate_title(){
+      $errors = array();
+      if($this->title == '' || $this->title == null){
+        $errors[] = "Title can't be empty.";
+      }
+      if(strlen($this->title) > 100){
+        $errors[] = "Title has max length 100 characters.";
+      }
+      return $errors;
     }
   }

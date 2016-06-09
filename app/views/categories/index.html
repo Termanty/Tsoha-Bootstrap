@@ -2,6 +2,22 @@
 {% block content %}
 
 <h1>Categories</h1>
+
+{% if current_user %}
+  <form class="form-inline" method="post" action="{{base_path}}/categories">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" name="name" placeholder="Tag">
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <input type="text" name="description" 
+        placeholder="Some description of the tag">
+    </div>
+    <button type="submit" class="btn btn-primary">Create new category</button>
+  </form>
+{% endif %}
+
 <table class="table">
     <thead>
         <tr>

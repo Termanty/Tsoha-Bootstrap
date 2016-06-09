@@ -4,12 +4,14 @@
     
     public $id, $topic_id, $user_id, $username, $content, $published;
 
-    public function __construt($attributes){
+    public function __construct($attributes){
       parent::__construct($attributes);
+      $this->validators = array('validate_content');
     }
 
     public static function findMessagesForTopic($topic_id){
-      $query = DB::connection()->prepare('SELECT * FROM Message Where topic_id = :topic_id');
+      $query = DB::connection()->prepare(
+        'SELECT * FROM Message Where topic_id = :topic_id');
       $query->execute(array('topic_id' => $topic_id));
       $rows = $query->fetchAll();
       $messages = array();
@@ -44,5 +46,13 @@
           'content' => $row['content'],
           'published' => $row['published']
       ));
+    }
+
+    public function validate_content(){
+      $errors = array();
+      if($this->content == '' || $this->content == null){
+        $errors[] = "Content can't be empty.";
+      }
+      return $errors;
     }
   }

@@ -47,4 +47,8 @@
   $routes->get('/categories', function() {
     CategoriesController::categories();
   });
+  
+  $routes->post('/categories', function() {
+    CategoriesController::new_category();
+  });
 

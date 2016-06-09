@@ -1,7 +1,5 @@
 <?php
 
-  require 'app/models/topic.php';
-  require 'app/models/message.php';
   class MessagesController extends BaseController{
 
     public static function reply($id){
@@ -12,6 +10,13 @@
         'user_id' => $user->id,
         'content' => $params['message'] 
       ));
+      $errors = $message->errors();
+      if(count($errors) > 0){
+        $topic = Topic::find($id);
+        $messages = Message::findMessagesForTopic($id);
+        View::make('/topics/show.html', array(
+          'errors' => $errors, 'topic' => $topic, 'messages' => $messages));
+      }
       $message->save();
       Redirect::to('/topics/' . $id, array('alert_message' => 'new reply'));
     }

@@ -8,7 +8,7 @@ class Tag extends BaseModel{
       parent::__construct($attributes);
     }
 
-    public static function getForTopic($topic_id){
+    public static function fetchTags($topic_id){
       $query = DB::connection()->prepare('SELECT * FROM Tag WHERE topic_id = :id');
       $query->execute(array('id' => $topic_id));
       $rows = $query->fetchAll();
@@ -20,7 +20,7 @@ class Tag extends BaseModel{
     }
 
     private static function getTag($row){
-      $category = Gategory::getGategory($row['category_id']);
+      $category = Category::find($row['category_id']);
       return new Tag(array(
         'id' => $row['id'],
         'topic_id' => $row['topic_id'],

@@ -1,7 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Topic: {{topic.title}}</h1>
+<h1>{{topic.title}}</h1>
+
+<form class="form-inline">
+  
+    {% for tag in topic.tags %}
+      <button type="button" class="btn btn-info btn-xs">{{tag.name}}</button>
+    {% endfor %}
+      <div class="input-group input-group-sm">
+        <input type="text" class="form-control" placeholder="tag">
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-warning">add</button></span>
+      </div>
+</form>
 
 <table class="table">
     <thead>

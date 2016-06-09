@@ -10,13 +10,12 @@
     }
     
     public static function find($id){
-      $query = DB::connection()->prepare('SELECT * FROM Member WHERE id = :id LIMIT 1');
+      $query = DB::connection()->prepare('
+        SELECT * FROM Member WHERE id = :id LIMIT 1');
       $query->execute(array('id' => $id));
       $row = $query->fetch();
-      if($row){
-        return Member::getMember($row);
-      }
-      return null;
+      if(is_null($row)) return null;
+      return Member::getMember($row);
     }
 
     public static function all(){
@@ -43,6 +42,15 @@
       $this->joined = $row['joined'];
     }
 
+    public static function getMember($row){
+      return new Member(array( 
+        'id' => $row['id'],
+        'username' => $row['username'],
+        'password' => $row['password'],
+        'joined' => $row['joined']
+      ));
+    }
+    
     public static function authenticate($username, $password) {
       $query = DB::connection()->prepare('
         SELECT * FROM Member 
@@ -56,15 +64,6 @@
         return Member::getMember($row);
       }
       return null;
-    }
-
-    public static function getMember($row){
-      return new Member(array( 
-        'id' => $row['id'],
-        'username' => $row['username'],
-        'password' => $row['password'],
-        'joined' => $row['joined']
-      ));
     }
 
     public function validate_username(){

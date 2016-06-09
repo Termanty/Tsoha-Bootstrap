@@ -1,6 +1,5 @@
 <?php
 
-  require 'app/models/member.php';
   class MembersController extends BaseController{
     
     public static function members(){
@@ -24,14 +23,12 @@
         'password' => $params['password']
       ));
       $errors = $member->errors();
-      if(count($errors) == 0){
-        $member->save();
-        Redirect::to('/members/' . $member->id, array(
-          'alert_message' => 'Well come to Juttupaikka'));
-      }else{
-        View::make('members/signup.html', array(
-          'errors' => $errors));
+      if(count($errors) > 0){
+        View::make('members/signup.html', array('errors' => $errors));
       }
+      $member->save();
+      Redirect::to('/members/' . $member->id, array(
+        'alert_message' => 'Well come to Juttupaikka'));
     }
 
     public static function login(){

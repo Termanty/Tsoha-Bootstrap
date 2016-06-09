@@ -36,7 +36,11 @@
       {% for topic in topics %} 
         <tr>
           <th><a href="{{base_path}}/members/{{topic.user_id}}">{{topic.username}}</th>
-          <th><a href="{{base_path}}/topics/{{topic.id}}">{{topic.title}}</th>
+          <th><a href="{{base_path}}/topics/{{topic.id}}">{{topic.title}}</a>
+            {% for tag in topic.tags %}
+            <button type="button" class="btn btn-info btn-xs">{{tag.name}}</button>
+            {% endfor %}
+          </th>
           <th>{{topic.published}}</th>
         </tr>
       {% endfor %}
