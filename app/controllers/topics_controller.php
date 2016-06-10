@@ -11,7 +11,11 @@
     public static function topic($id){
       $topic = Topic::find($id);
       $messages = Message::findMessagesForTopic($id);
-   	  View::make('topics/show.html', array('topic' => $topic, 'messages' => $messages));
+      $tags = Category::tagsNotUsedForTopic($id);
+      View::make('topics/show.html', array(
+        'topic' => $topic,
+        'messages' => $messages,
+        'tags' => $tags));
     }
 
     public static function new_topic(){

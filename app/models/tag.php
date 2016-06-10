@@ -19,6 +19,19 @@ class Tag extends BaseModel{
       return $tags;
     }
 
+    public function save(){
+      $query = DB::connection()->prepare('
+        INSERT INTO
+        TAg (topic_id, category_id) 
+        VALUES (:topic_id, :category_id)
+        returning *');     
+      $query->execute(array(
+        'topic_id' => $this->topic_id,
+        'category_id' => $this->category_id));
+      $row = $query->fetch();
+      $this->id = $row['id'];
+    }
+
     private static function getTag($row){
       $category = Category::find($row['category_id']);
       return new Tag(array(

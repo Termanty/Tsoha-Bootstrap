@@ -19,11 +19,35 @@
       }
       return $categories;
     }
+    
+    public static function tagsNotUsedForTopic($topic_id){
+      $query = DB::connection()->prepare('
+        SELECT * FROM Category
+        EXCEPT
+        SELECT c.id, name, description FROM Category c, Tag t
+          WHERE c.id = t.category_id and t.topic_id = :id');
+      $query->execute(array('id' => $topic_id));
+      $rows = $query->fetchAll();
+      $categories = array();
+      foreach($rows as $row){
+        $categories[] = Category::getCategory($row);
+      }
+      return $categories;
+    }
 
     public static function find($id){
       $query = DB::connection()->prepare('
         SELECT * FROM Category WHERE id = :id LIMIT 1');
       $query->execute(array('id' => $id));
+      $row = $query->fetch();
+      if(is_null($row)) return null;
+      return Category::getCategory($row);
+    }      
+
+    public static function findByName($name){
+      $query = DB::connection()->prepare('
+        SELECT * FROM Category WHERE name = :name LIMIT 1');
+      $query->execute(array('name' => $name));
       $row = $query->fetch();
       if(is_null($row)) return null;
       return Category::getCategory($row);
@@ -46,7 +70,7 @@
       return new Category(array(
         'id' => $row['id'],
         'name' => $row['name'],
-        'description' => $row['description'],
+        'description' => $row['description']
       ));
     }
 

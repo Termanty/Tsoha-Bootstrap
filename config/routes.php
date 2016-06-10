@@ -52,3 +52,6 @@
     CategoriesController::new_category();
   });
 
+  $routes->post('/tags', function() {
+    TagsController::new_tag();
+  });
