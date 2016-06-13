@@ -52,6 +52,10 @@
     CategoriesController::new_category();
   });
 
+  $routes->post('/categories/:id/destroy', function($id) {
+    CategoriesController::destroy($id);
+  });
+
   $routes->post('/tags', function() {
     TagsController::new_tag();
   });

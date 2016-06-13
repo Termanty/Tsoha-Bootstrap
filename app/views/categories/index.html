@@ -32,6 +32,13 @@
             <th>{{categ.name}}</th>
           <th>5</th>
           <th>{{categ.description}}</th>
+          {% if current_user %}
+          <th>
+            <form action="{{base_path}}/categories/{{categ.id}}/destroy" method="post">
+              <input type="submit" value="delete" class="btn btn-danger btn-xs" />
+            </form>
+          </th>
+          {% endif %}
         </tr>
       {% endfor %}
     </tbody>

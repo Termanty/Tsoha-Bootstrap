@@ -66,6 +66,12 @@
       $this->id = $row['id'];
     }
 
+    public function delete(){
+      $query = DB::connection()->prepare('
+        DELETE FROM Category WHERE id = :id');
+      $query->execute(array('id' => $this->id));
+    }
+         
     private static function getCategory($row){
       return new Category(array(
         'id' => $row['id'],

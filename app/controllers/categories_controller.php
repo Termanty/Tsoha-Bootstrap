@@ -22,4 +22,11 @@
       $category->save();
       Redirect::to('/categories', array('alert_message' => 'New category created.'));
     }
+
+    public static function destroy($id){
+      $params = $_POST;
+      $category = new Category(array('id' => $id));
+      $category->delete();
+      Redirect::to('/categories', array('alert_message' => 'Category has removed.'));
+    }
   }
