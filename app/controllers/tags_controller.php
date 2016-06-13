@@ -4,7 +4,7 @@
 
     public static function new_tag(){
       $params = $_POST;
-      $category = Category::findByName($params['name']);
+      $category = Category::findByName($params['tagName']);
       $tag = new Tag(array(
         'topic_id' => $params['topic_id'],
         'category_id' => $category->id));

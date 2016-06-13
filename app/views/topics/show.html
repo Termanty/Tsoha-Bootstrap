@@ -9,7 +9,7 @@
     <button type="button" class="btn btn-info btn-xs">{{tag.name}}</button>
   {% endfor %}
   <div class="input-group input-group-sm">
-    <input list="tags" name="name" class="form-control" placeholder="tag">
+    <input list="tags" name="tagName" class="form-control" placeholder="tag">
     <datalist list id="tags">
       {% for tag in tags %}
         <option value={{tag.name}}>
