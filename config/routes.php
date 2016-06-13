@@ -44,6 +44,14 @@
     MembersController::new_member();
   });
 
+  $routes->post('/members/:id/edit', function($id){
+    MembersController::edit($id);
+  });
+
+  $routes->post('/members/:id/destroy', function($id){
+    MembersController::destroy($id);
+  });
+
   $routes->get('/categories', function() {
     CategoriesController::categories();
   });

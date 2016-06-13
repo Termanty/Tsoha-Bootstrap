@@ -19,6 +19,14 @@ class Tag extends BaseModel{
       return $tags;
     }
 
+    public static function getNumberOfRefs($categ_id){
+      $query = DB::connection()->prepare('
+        SELECT COUNT(*) FROM Tag WHERE category_id = :id');
+      $query->execute(array('id' => $categ_id));
+      $row = $query->fetch();
+      return $row['count'];
+    }
+
     public function save(){
       $query = DB::connection()->prepare('
         INSERT INTO

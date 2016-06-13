@@ -22,15 +22,15 @@
     <thead>
         <tr>
             <th>name</th>
-            <th>#links</th>
-            <th>kuvaus</th>
+            <th>#ref</th>
+            <th>description</th>
         </tr>
     </thead>
     <tbody>
       {% for categ in categories %}
         <tr>
-            <th>{{categ.name}}</th>
-          <th>5</th>
+          <th>{{categ.name}}</th>
+          <th>{{categ.refCount}}</th>
           <th>{{categ.description}}</th>
           {% if current_user %}
           <th>

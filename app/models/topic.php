@@ -30,6 +30,14 @@
       return $topics;
     }
 
+    public static function numberOfpostByUser($user_id){
+      $query = DB::connection()->prepare('
+        SELECT COUNT(*) FROM Topic WHERE user_id = :id');
+      $query->execute(array('id' => $user_id));
+      $row = $query->fetch();
+      return $row['count'];
+    }
+
     public function save(){
       $query = DB::connection()->prepare('INSERT INTO 
         Topic (user_id, title, published) 

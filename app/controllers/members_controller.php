@@ -12,10 +12,6 @@
       View::make('members/show.html', array('member' => $member));
     }
 
-    public static function signup(){
-      View::make('members/signup.html');
-    }
-
     public static function new_member(){
       $params = $_POST;
       $member = new Member(array(
@@ -29,6 +25,38 @@
       $member->save();
       Redirect::to('/members/' . $member->id, array(
         'alert_message' => 'Well come to Juttupaikka'));
+    }
+    
+    public static function edit($id){
+      $params = $_POST;
+      $member = new Member(array(
+        'id' => $id,
+        'username' => $params['username'],
+        'password' => $params['password']
+      ));
+      $errors = $member->errors();
+      if(count($errors) > 0){
+        $member = Member::find($id);
+        View::make('members/show.html', array(
+          'member' => $member,
+          'errors' => $errors));
+      }
+      $member->edit();
+      $member = Member::find($id);
+      Redirect::to('/members/' . $id, array(
+        'member' => $member,
+        'alert_message' => 'Edit successfull'));
+    }
+
+    public static function destroy($id){
+      $member = new Member(array('id' => $id));
+      $member->delete();
+      unset($_SESSION['user']);
+      Redirect::to('/', array('alert_message' => 'You are so dead'));
+    }
+
+    public static function signup(){
+      View::make('members/signup.html');
     }
 
     public static function login(){

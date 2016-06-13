@@ -2,7 +2,7 @@
 
   class Category extends BaseModel{
 
-    public $id, $name, $description;
+    public $id, $name, $description, $refCount;
 
     public function __construct($attributes){
       parent::__construct($attributes);
@@ -73,10 +73,12 @@
     }
          
     private static function getCategory($row){
+      $count = Tag::getNumberOfRefs($row['id']);
       return new Category(array(
         'id' => $row['id'],
         'name' => $row['name'],
-        'description' => $row['description']
+        'description' => $row['description'],
+        'refCount' => $count
       ));
     }
 

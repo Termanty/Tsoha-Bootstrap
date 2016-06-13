@@ -21,6 +21,14 @@
       return $messages;
     }
 
+    public static function numberOfmsgByUser($user_id){
+      $query = DB::connection()->prepare('
+        SELECT COUNT(*) FROM Message WHERE user_id = :id');
+      $query->execute(array('id' => $user_id));
+      $row = $query->fetch();
+      return $row['count'];
+    }
+
     public function save(){
       $query = DB::connection()->prepare('INSERT INTO 
         Message (topic_id, user_id, content, published) 

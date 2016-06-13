@@ -8,3 +8,9 @@ Yleisiä linkkejä:
 ## Työn aihe
 
 * [Keskustelufoorumi](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Keskustelufoorumi.html)
+
+## Kirjautuminen
+Luo omat tunnukset tai käytä
+username: quest
+password: quest
+

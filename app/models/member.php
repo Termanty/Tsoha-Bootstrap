@@ -2,7 +2,7 @@
 
   class Member extends BaseModel{
 
-    public $id, $username, $password, $joined;
+    public $id, $username, $password, $joined, $topicCount, $msgCount;
 
     public function __construct($attributes){
       parent::__construct($attributes);
@@ -41,13 +41,35 @@
       $this->id = $row['id'];
       $this->joined = $row['joined'];
     }
+    
+    public function edit(){
+      $query = DB::connection()->prepare('
+        UPDATE Member
+          SET username = :username, password = :password
+          WHERE id = :id');
+      $query->execute(array(
+        'username' => $this->username,
+        'password' => $this->password,
+        'id' => $this->id
+      ));
+    }
+    
+    public function delete(){
+      $query = DB::connection()->prepare('
+        DELETE FROM Member WHERE id = :id');
+      $query->execute(array('id' => $this->id));
+    }
 
     public static function getMember($row){
+      $topicCount = Topic::numberOfpostByUser($row['id']);
+      $msgCount = Message::numberOfmsgByUser($row['id']);
       return new Member(array( 
         'id' => $row['id'],
         'username' => $row['username'],
         'password' => $row['password'],
-        'joined' => $row['joined']
+        'joined' => $row['joined'],
+        'topicCount' => $topicCount,
+        'msgCount' => $msgCount
       ));
     }
     
@@ -57,7 +79,7 @@
         WHERE username = :username AND password = :password LIMIT 1');
       $query->execute(array(
         'username' => $username,
-        'password' => $password
+        'password' => $password,
       ));
       $row = $query->fetch();
       if($row) {
@@ -82,7 +104,7 @@
       if($this->password == '' || $this->password == null){
         $errors[] = "Password can't be empty.";
       }
-      if(strlen($this->username) < 8 || strlen($this->password) > 30){
+      if(strlen($this->password) < 8 || strlen($this->password) > 30){
         $errors[] = "Password has to be between 8 and 30 characters long.";
       }
       return $errors;

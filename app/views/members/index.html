@@ -8,15 +8,19 @@
         <tr>
             <th>Username</th>
             <th>#topics</th>
+            <th>#messages</th>
             <th>member since</th>
         </tr>
     </thead>
     <tbody>
       {% for mem in members %}
         <tr>
-            <td>{{mem.username}}</td>
-            <td>3</td>
-            <td>{{mem.joined}}</td>
+          <td>
+            <a href="{{base_path}}/members/{{mem.id}}">{{mem.username}}</a>
+          </td>
+          <td>{{mem.topicCount}}</td>
+          <td>{{mem.msgCount}}</td>
+          <td>{{mem.joined}}</td>
         </tr>
       {% endfor %}
     </tbody>
