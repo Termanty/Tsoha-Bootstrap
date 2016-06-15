@@ -5,13 +5,7 @@
 
 {% for tag in topic.tags %}
   <form action="{{base_path}}/tags/{{tag.id}}/destroy" method="post" style="display:inline-block;">
-    <input name="topic_id" value={{topic.id}} type="hidden" \>
-  <!--  <button class="btn btn-info btn-xs disabled" style="background-color:blue">
-      {{tag.name}}
-      {% if current_user.id == topic.user_id %}
-        <span class="tagDelete"> &#10006;</span>
-      {% endif %}
-    </button> -->
+    <input name="topic_id" value={{topic.id}} type="hidden" />
     <div class="mybutton">
       {{tag.name}}
       {% if current_user.id == topic.user_id %}
@@ -20,19 +14,22 @@
     </div>
   </form>
 {% endfor %}
-<form method="post" action="{{base_path}}/tags" class="form-inline" style="display:inline-block;">
-  <input type="hidden" name="topic_id" value={{topic.id}}>
-  <div class="input-group input-group-sm">
-    <input list="tags" name="tagName" class="form-control" placeholder="tag">
-    <datalist list id="tags">
-      {% for tag in tags %}
-        <option value={{tag.name}}>
-      {% endfor %}
-    </datalist>
-    <span class="input-group-btn">
-      <button type="submit" class="btn btn-warning">+</button></span>
-  </div>
-</form>
+
+
+{% if current_user.id == topic.user_id %}
+  <form method="post" action="{{base_path}}/tags" class="form-inline" style="display:inline-block;">
+    <input type="hidden" name="topic_id" value={{topic.id}} />
+    <div class="input-group input-group-sm">
+      <input list="tags" name="tagName" class="form-control" placeholder="tag" />
+      <datalist list id="tags">
+        {% for tag in tags %}
+          <option value={{tag.name}}>
+        {% endfor %}
+      </datalist>
+      <span class="input-group-btn"><button type="submit" class="btn btn-warning">+</button></span>
+    </div>
+  </form>
+{% endif %}
 
 <table class="table">
   <thead>
