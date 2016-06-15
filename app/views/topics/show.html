@@ -3,11 +3,19 @@
 
 <h1>{{topic.title}}</h1>
 
-<form method="post" action="{{base_path}}/tags" class="form-inline">
+{% for tag in topic.tags %}
+  <form action="{{base_path}}/tags/{{tag.id}}/destroy" method="post" style="display:inline-block;">
+    <input name="topic_id" value={{topic.id}} type="hidden" \>
+    <button type="submit" class="btn btn-info btn-xs disabled" style="background-color:blue">
+      {{tag.name}}
+      {% if current_user.id == topic.user_id %}
+        <span class="tagDelete"> &#10006;</span>
+      {% endif %}
+    </button>
+  </form>
+{% endfor %}
+<form method="post" action="{{base_path}}/tags" class="form-inline" style="display:inline-block;">
   <input type="hidden" name="topic_id" value={{topic.id}}>
-  {% for tag in topic.tags %}
-    <button type="button" class="btn btn-info btn-xs">{{tag.name}}</button>
-  {% endfor %}
   <div class="input-group input-group-sm">
     <input list="tags" name="tagName" class="form-control" placeholder="tag">
     <datalist list id="tags">
@@ -21,22 +29,34 @@
 </form>
 
 <table class="table">
-    <thead>
-        <tr>
-            <th>member</th>
-            <th>message</th>
-            <th>date</th>
-        </tr>
-    </thead>
-    <tbody>
-      {% for msg in messages %}
-        <tr>
-            <th><a href="{{base_path}}/members/{{msg.user_id}}">{{msg.username}}</th>
-            <th>{{msg.content}}</th>
-            <th>{{msg.published}}</th>
-        </tr>
-      {% endfor %}
-    </tbody>
+  <thead>
+    <tr>
+      <th>member</th>
+      <th>message</th>
+      <th>published</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for msg in messages %}
+      <tr>
+        <th><a href="{{base_path}}/members/{{msg.user_id}}">{{msg.username}}</th>
+        <th>
+          {% if msg.deleted %}
+            /<deleted/>
+          {% else %}
+            {{msg.content}}
+            {% if current_user.id == msg.user_id %}
+              <button class="btn btn-warning btn-xs" style="display:inline-block;">edit</button>
+              <form action="{{base_path}}/messages/{{msg.id}}/destroy" method="post" style="display:inline-block;">
+                <button type="submit" class="btn btn-danger btn-xs">delete</button>
+              </form>
+            {% endif %}
+          {% endif %}
+        </th>
+        <th>{{msg.published}}</th>
+      </tr>
+    {% endfor %}
+  </tbody>
 </table>
 
 {% if current_user %}

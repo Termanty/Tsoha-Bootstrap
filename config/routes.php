@@ -16,6 +16,14 @@
     MessagesController::reply($id);
   });
 
+  $routes->post('/messages/:id/update', function($id) {
+    MessagesController::update($id);
+  });
+
+  $routes->post('/messages/:id/destroy', function($id) {
+    MessagesController::destroy($id);
+  });
+
   $routes->get('/signup', function() {
     MembersController::signup();
   });
@@ -67,3 +75,8 @@
   $routes->post('/tags', function() {
     TagsController::new_tag();
   });
+
+  $routes->post('/tags/:id/destroy', function($id) {
+    TagsController::destroy($id);
+  });
+

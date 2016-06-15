@@ -4,7 +4,6 @@
 
     public static function index(){
       $topics = Topic::all(); 
-      Kint::dump($topics);
    	  View::make('topics/index.html', array('topics' => $topics));
     }
 

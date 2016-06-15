@@ -1,10 +1,9 @@
-/*
-.background-image {
-  background-image: url('../img/background_leaf.jpg');
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+
+.hole_background{
+  background-color: black;
+  background: linear-gradient(black,#151B54,black);
 }
-*/
+
 
 /*
 .semi-transparent {
@@ -28,3 +27,25 @@
   border-color: transparent;
 }
 */
+
+.tagDelete{
+  background-color:red;
+  cursor:auto;
+  pointer-events:auto;
+}
+
+.tagDelete:hover{
+  cursor:pointer;
+}
+
+#navigation,.navbar .navbar-default{
+  background-image: url('../img/rocketbanner.jpg');
+  background-repeat: no-repeat;
+  background-color: black;
+}
+
+body{
+  max-width: 1024px;
+  margin: 0 auto !important;
+  float: none !important;
+}

@@ -56,7 +56,9 @@
     
     public function delete(){
       $query = DB::connection()->prepare('
-        DELETE FROM Member WHERE id = :id');
+        UPDATE Member 
+          SET deleted = TRUE
+          WHERE id = :id');
       $query->execute(array('id' => $this->id));
     }
 

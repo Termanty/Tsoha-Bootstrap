@@ -30,7 +30,7 @@ class Tag extends BaseModel{
     public function save(){
       $query = DB::connection()->prepare('
         INSERT INTO
-        TAg (topic_id, category_id) 
+        Tag (topic_id, category_id) 
         VALUES (:topic_id, :category_id)
         returning *');     
       $query->execute(array(
@@ -38,6 +38,12 @@ class Tag extends BaseModel{
         'category_id' => $this->category_id));
       $row = $query->fetch();
       $this->id = $row['id'];
+    }
+
+    public function delete(){
+      $query = DB::connection()->prepare('
+        DELETE FROM Tag WHERE id = :id');
+      $query->execute(array('id' => $this->id));
     }
 
     private static function getTag($row){
