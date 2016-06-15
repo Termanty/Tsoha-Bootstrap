@@ -30,12 +30,13 @@
 
 .tagDelete{
   background-color:red;
-  cursor:auto;
-  pointer-events:auto;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 .tagDelete:hover{
-  cursor:pointer;
+  color: black;
+  cursor: pointer;
 }
 
 #navigation,.navbar .navbar-default{
@@ -48,4 +49,28 @@ body{
   max-width: 1024px;
   margin: 0 auto !important;
   float: none !important;
+}
+
+.mybutton{
+  display: inline-block;
+  color: white;
+  font-size: 12px;
+  padding: 1px 5px 2px 5px;
+  background: midnightblue;
+  border: 2px;
+  border-style: solid;
+  border-color: #342d7e;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.myclick{
+  font-size: 10px;
+  background: #ea4848;
+  padding: 0px 3px 1px 3px;
+  pointer-events: auto;
+  cursor: pointer;
+  border-radius: 10px;
+  border-color: #ea4848;
+  border-style: solid;
 }

@@ -17,13 +17,13 @@
       $topic_id = $_POST['topic_id'];
       $tag = new Tag(array('id' => $id));
       $tag->delete();
-      $topic = Topic::find($topic_id);
-      $messages = Message::findMessagesForTopic($topic_id);
-      $tags = Category::tagsNotUsedForTopic($topic_id);
+     // $topic = Topic::find($topic_id);
+     // $messages = Message::findMessagesForTopic($topic_id);
+    //  $tags = Category::tagsNotUsedForTopic($topic_id);
       Redirect::to('/topics/'.$topic_id, array(
-        'topic' => $topic,
-        'messages' => $messages,
-        'tags' => $tags,
+     //   'topic' => $topic,
+     //   'messages' => $messages,
+     //   'tags' => $tags,
         'alert_message' => 'Tag removed'));
     }
   }

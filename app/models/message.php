@@ -2,11 +2,20 @@
 
   class Message extends BaseModel{
     
-    public $id, $topic_id, $user_id, $username, $content, $published;
+    public $id, $topic_id, $user_id, $username, $content, $published, $deleted;
 
     public function __construct($attributes){
       parent::__construct($attributes);
       $this->validators = array('validate_content');
+    }
+
+    public static function find($id){
+      $query = DB::connection()->prepare(
+        'SELECT * FROM Message WHERE id = :id LIMIT 1');
+      $query->execute(array('id' => $id));
+      $row = $query->fetch();
+      if(is_null($row)) return null;
+      return Message::getMessage($row);
     }
 
     public static function findMessagesForTopic($topic_id){
@@ -30,7 +39,8 @@
     }
 
     public function save(){
-      $query = DB::connection()->prepare('INSERT INTO 
+      $query = DB::connection()->prepare('
+        INSERT INTO 
         Message (topic_id, user_id, content, published) 
         VALUES (:topic_id, :user_id, :content, NOW()) 
         returning *');
@@ -44,6 +54,12 @@
       $this->published = $row['published'];
     }
 
+    public function delete(){
+      $query = DB::connection()->prepare('
+        UPDATE Message SET deleted = true WHERE id = :id');
+      $query->execute(array('id' => $this->id));
+    }
+
     public static function getMessage($row){
       $member = Member::find($row['user_id']);
       return new Message(array(
@@ -52,7 +68,8 @@
           'user_id' => $row['user_id'],
           'username' => $member->username,
           'content' => $row['content'],
-          'published' => $row['published']
+          'published' => $row['published'],
+          'deleted' => $row['deleted']
       ));
     }
 

@@ -6,12 +6,18 @@
 {% for tag in topic.tags %}
   <form action="{{base_path}}/tags/{{tag.id}}/destroy" method="post" style="display:inline-block;">
     <input name="topic_id" value={{topic.id}} type="hidden" \>
-    <button type="submit" class="btn btn-info btn-xs disabled" style="background-color:blue">
+  <!--  <button class="btn btn-info btn-xs disabled" style="background-color:blue">
       {{tag.name}}
       {% if current_user.id == topic.user_id %}
         <span class="tagDelete"> &#10006;</span>
       {% endif %}
-    </button>
+    </button> -->
+    <div class="mybutton">
+      {{tag.name}}
+      {% if current_user.id == topic.user_id %}
+        &nbsp;<button type="submit" class="myclick">&#10006;</button>
+      {% endif %}
+    </div>
   </form>
 {% endfor %}
 <form method="post" action="{{base_path}}/tags" class="form-inline" style="display:inline-block;">
@@ -42,7 +48,7 @@
         <th><a href="{{base_path}}/members/{{msg.user_id}}">{{msg.username}}</th>
         <th>
           {% if msg.deleted %}
-            /<deleted/>
+            <i>&lt; deleted &gt;</i>
           {% else %}
             {{msg.content}}
             {% if current_user.id == msg.user_id %}

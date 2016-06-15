@@ -20,4 +20,10 @@
       $message->save();
       Redirect::to('/topics/' . $id, array('alert_message' => 'new reply'));
     }
+
+    public static function destroy($id){
+      $message = Message::find($id);
+      $message->delete();
+      Redirect::to('/topics/'.$message->topic_id, array('alert_message' => 'Message removed'));
+    }
   }
