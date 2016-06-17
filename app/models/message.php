@@ -54,6 +54,15 @@
       $this->published = $row['published'];
     }
 
+    public function update(){
+      $query = DB::connection()->prepare('
+        UPDATE Message SET content = :content WHERE id = :id');
+      $query->execute(array(
+        'content' => $this->content,
+        'id' => $this->id
+      ));
+    } 
+
     public function delete(){
       $query = DB::connection()->prepare('
         UPDATE Message SET deleted = true WHERE id = :id');

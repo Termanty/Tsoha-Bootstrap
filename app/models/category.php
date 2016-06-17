@@ -24,7 +24,8 @@
       $query = DB::connection()->prepare('
         SELECT * FROM Category
         EXCEPT
-        SELECT c.id, name, description FROM Category c, Tag t
+        SELECT c.id, name, description 
+          FROM Category c, Tag t
           WHERE c.id = t.category_id and t.topic_id = :id');
       $query->execute(array('id' => $topic_id));
       $rows = $query->fetchAll();
@@ -65,7 +66,7 @@
       $row = $query->fetch();
       $this->id = $row['id'];
     }
-
+   
     public function delete(){
       $query = DB::connection()->prepare('
         DELETE FROM Category WHERE id = :id');

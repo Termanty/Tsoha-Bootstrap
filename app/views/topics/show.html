@@ -9,7 +9,7 @@
     <div class="mybutton">
       {{tag.name}}
       {% if current_user.id == topic.user_id %}
-        &nbsp;<button type="submit" class="myclick">&#10006;</button>
+        &nbsp;<button type="submit" class="myclick" title="delete tag">&#10006;</button>
       {% endif %}
     </div>
   </form>
@@ -42,21 +42,30 @@
   <tbody>
     {% for msg in messages %}
       <tr>
-        <th><a href="{{base_path}}/members/{{msg.user_id}}">{{msg.username}}</th>
-        <th>
-          {% if msg.deleted %}
-            <i>&lt; deleted &gt;</i>
-          {% else %}
+        <td><a href="{{base_path}}/members/{{msg.user_id}}">{{msg.username}}</a></td>
+        <td>
+        {% if msg.deleted %}
+          <i>&lt; deleted &gt;</i>
+        {% else %}
+          <div id="show_{{msg.id}}" data-id={{msg.id}}>
             {{msg.content}}
             {% if current_user.id == msg.user_id %}
-              <button class="btn btn-warning btn-xs" style="display:inline-block;">edit</button>
+            <button id="btn_{{msg.id}}" data-id={{msg.id}} class="btn btn-warning btn-xs" style="display:inline-block;">edit</button>
               <form action="{{base_path}}/messages/{{msg.id}}/destroy" method="post" style="display:inline-block;">
                 <button type="submit" class="btn btn-danger btn-xs">delete</button>
               </form>
             {% endif %}
-          {% endif %}
-        </th>
-        <th>{{msg.published}}</th>
+          </div>
+          <div id="edit_{{msg.id}}" data-id={{msg.id}} class="hidden">
+            <form action="{{base_path}}/messages/{{msg.id}}/update" method="post">
+              <textarea name="message" style="width:100%">{{msg.content}}</textarea>
+              <button type="submit" class="btn btn-warning btn-xs">submit</button>
+              <button class="btn btn-primary btn-xs">forget</button>
+            </form>
+          </div>
+        {% endif %}
+        </td>
+        <td>{{msg.published}}</td>
       </tr>
     {% endfor %}
   </tbody>
